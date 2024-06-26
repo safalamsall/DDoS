@@ -21,10 +21,8 @@ bytes = random._urandom(1490)
 os.system("clear")
 os.system("figlet DDos Attack")
 print()
-print("Author   : Tech Tushar")
-print("You Tube : https://www.youtube.com/c/TechTushar")
-print("github   : https://github.com/Techtushar07")
-print("Facebook : https://www.facebook.com/daveratushar/")
+print("Author   : Saphal Lamsal")
+
 print()
 
 # Get target IP and port
